@@ -52,7 +52,7 @@ def scrape_all(loc): #give it the address
         tmpstr = ""
         astr = str(soup).lower().find("startson")
         astr+=10
-        while True:
+        while True and astr != 9:
             if(str(soup).lower()[astr]==","):
                 break
             tmpstr += str(soup).lower()[astr]
@@ -65,27 +65,80 @@ def scrape_all(loc): #give it the address
         tmpstr = ""
         astr = str(soup).lower().find("endson")
         astr+=8
-        while True:
+        while True and astr != 7:
             if(str(soup).lower()[astr]==","):
                 break
             tmpstr += str(soup).lower()[astr]
             astr+=1
 
         ends=tmpstr
-        
 
+        #location
+        location=""
+        astr= str(soup).lower().find("strong>location:")
+        astr+= 16
+        tmpstr=""
+        while True and astr!= 15:
+            if(tmpstr[len(tmpstr)-7:]=="</span>"):
+                tmpstr = tmpstr.split('>')[2]
+                tmpstr = tmpstr.split('<')[0]
+                break
+            tmpstr += str(soup).lower()[astr]
+            astr+=1
+        location=tmpstr
 
+        #title shit
+        title=""
+        astr= str(soup).lower().find("imageurl")
+        tmpstr = ""
+        while True:
+            if(tmpstr[len(tmpstr)-4:]=="name"):
+                break
+            tmpstr += str(soup).lower()[astr]
+            astr+=1
 
+        astr+=3
+        tmpstr=""
+        while True:
+            if(tmpstr[len(tmpstr)-1:]==","):
+                break
+            tmpstr += str(soup)[astr]
+            astr+=1
+        title= tmpstr[:len(tmpstr)-2]
         print("Free Food Available")
+        print("title: ", title)
+
+        final_location = ""
+        if(location !=""):
+            final_location = location
+        else:
+            if(locationid !="null" and locationid !=""):
+                final_location = locationid
+            
+            if(len(final_location)>0):
+                final_location += "\n"
+    
+            if(address !="null" and address != ""):
+                final_location += address
+            
+            if(len(final_location)>0):
+                final_location += "\n"
+
+            if(name != "null" and name != ""):
+                final_location += name
+
+                
+
         print("locationid: ",locationid)
         print("address: ", address)
         print("name: ",name)
+        print("Location: ", location)
         print("Start Time: ", strts)
         print("End Time: ", ends)
+        print("Final Location: ", final_location)
+        return [title, final_location, strts, ends]
     else:
         print("No free food")
-
-
-
+        return None
 
 

@@ -14,6 +14,9 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from total_scraper import scrape_all
 from snaxk import  snack_all #this is for snacks/Maybe later
+from tinydb import TinyDB, Query
+
+db = TinyDB('db.json')
 
 def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
@@ -38,7 +41,13 @@ def MAIN_SCRAPER(url):
             a, b, c = tmplist[0], tmplist[1], tmplist[2]
             urladdress_food = url[:len(url)-14]+links[i]
             print(urladdress_food)
-            scrape_all(urladdress_food)
+            info=scrape_all(urladdress_food)
+            #get this and call database
+            if(info != None):
+                db.insert({'title':info[0], 'Location': info[1], 'start_time' :  info[2] , 'end_time' : info[3]})
+            #db.insert({'title': 'John', 'Location': ' ', 'start_time' : '', 'end_time' : ' '})
+
+    #post on website #tbd
 
     # Close the browser
     driver.quit()
