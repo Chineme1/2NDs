@@ -10,8 +10,9 @@ app = Flask(__name__)
 @app.route('/events', methods=['GET'])
 def send_data():
     # Sample data to be sent
+    print('req')
     data = packIT(MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events'))
-     
+    print('data')
     return jsonify(data)
 
 # Run the app

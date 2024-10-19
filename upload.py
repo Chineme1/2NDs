@@ -3,6 +3,7 @@ from scrape_main import MAIN_SCRAPER
 def packIT(list):
     finalArr = []
     for i in range(len(list)):
+        print('list', list[i][1])
         finalArr.append({
             'title': list[i][0],
             'location': list[i][1],

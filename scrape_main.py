@@ -14,14 +14,15 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from total_scraper import scrape_all
 from snaxk import  snack_all #this is for snacks/Maybe later
-from tinydb import TinyDB, Query
+# from tinydb import TinyDB, Query
 from post_website import hook
-from display import display
+from webdriver_manager.chrome import ChromeDriverManager
+
 
 
 def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
     # Open the webpage
     driver.get(url)
@@ -41,7 +42,7 @@ def MAIN_SCRAPER(url):
         if(len(tmplist)==3):
             a, b, c = tmplist[0], tmplist[1], tmplist[2]
             urladdress_food = url[:len(url)-14]+links[i]
-            print(urladdress_food)
+            # print(urladdress_food)
             info=scrape_all(urladdress_food)
             #get this and call database
             if(info != None):
@@ -54,5 +55,3 @@ def MAIN_SCRAPER(url):
     # Close the browser
 
 
-
-display(MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events'))
