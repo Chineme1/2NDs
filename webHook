@@ -1,9 +1,0 @@
-import requests
-import json
-
-
-webhook_url='https://webhook.site/3334bd56-2ebc-4499-ab3a-18df2fb36843'
-data = { 'name':'2nds Journey',
-        'Channel URL' : 'https://umdearborn.campuslabs.com/engage/'}
-
-r = requests.post(webhook_url, json.dumps(data), header={'Content-Type': 'application.json'})
