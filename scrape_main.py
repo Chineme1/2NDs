@@ -15,8 +15,9 @@ from bs4 import BeautifulSoup
 from total_scraper import scrape_all
 from snaxk import  snack_all #this is for snacks/Maybe later
 from tinydb import TinyDB, Query
+from post_website import hook
+from display import display
 
-db = TinyDB('db.json')
 
 def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
@@ -34,7 +35,7 @@ def MAIN_SCRAPER(url):
     # Find all <a> tags with href attributes
     links = [a['href'] for a in soup.find_all('a', href=True)]
     #print(links)
-
+    tot_lst =[]
     for i in range(len(links)):
         tmplist = links[i][1:].split("/")
         if(len(tmplist)==3):
@@ -44,14 +45,14 @@ def MAIN_SCRAPER(url):
             info=scrape_all(urladdress_food)
             #get this and call database
             if(info != None):
-                db.insert({'title':info[0], 'Location': info[1], 'start_time' :  info[2] , 'end_time' : info[3]})
+                tot_lst.append([info[0], info[1], info[2], info[3]])
+                #db.insert({'title':info[0], 'Location': info[1], 'start_time' :  info[2] , 'end_time' : info[3]})
             #db.insert({'title': 'John', 'Location': ' ', 'start_time' : '', 'end_time' : ' '})
-
     #post on website #tbd
-
-    # Close the browser
     driver.quit()
+    return tot_lst
+    # Close the browser
 
 
 
-MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events')
+display(MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events'))
