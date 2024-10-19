@@ -55,7 +55,7 @@ def scrape_all(loc): #give it the address
         while True and astr != 9:
             if(str(soup).lower()[astr]==","):
                 break
-            tmpstr += str(soup).lower()[astr]
+            tmpstr += str(soup)[astr]
             astr+=1
 
         strts=tmpstr
@@ -68,7 +68,7 @@ def scrape_all(loc): #give it the address
         while True and astr != 7:
             if(str(soup).lower()[astr]==","):
                 break
-            tmpstr += str(soup).lower()[astr]
+            tmpstr += str(soup)[astr]
             astr+=1
 
         ends=tmpstr
@@ -105,8 +105,8 @@ def scrape_all(loc): #give it the address
             tmpstr += str(soup)[astr]
             astr+=1
         title= tmpstr[:len(tmpstr)-2]
-        print("Free Food Available")
-        print("title: ", title)
+        #print("Free Food Available")
+        #print("title: ", title)
 
         final_location = ""
         if(location !=""):
@@ -129,13 +129,13 @@ def scrape_all(loc): #give it the address
 
                 
 
-        print("locationid: ",locationid)
+        '''print("locationid: ",locationid)
         print("address: ", address)
         print("name: ",name)
         print("Location: ", location)
         print("Start Time: ", strts)
         print("End Time: ", ends)
-        print("Final Location: ", final_location)
+        print("Final Location: ", final_location)'''
         return [title, final_location, strts, ends]
     else:
         print("No free food")
