@@ -13,9 +13,7 @@ for link in links:
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from total_scraper import scrape_all
-from snaxk import  snack_all #this is for snacks/Maybe later
 # from tinydb import TinyDB, Query
-from post_website import hook
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
