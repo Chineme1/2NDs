@@ -6,6 +6,10 @@ RUN apt-get update && apt-get install -y \
     unzip \
     libxi6 \
     libgconf-2-4 \
+    libnss3 \
+    libasound2 \
+    libx11-xcb1 \
+    fonts-liberation \
     && apt-get clean
 
 # Install Chrome
@@ -20,5 +24,8 @@ RUN pip install -r requirements.txt
 # Copy your application code
 COPY . .
 
-# Run your application
-CMD ["gunicorn", "server:app"]
+# Expose the port
+EXPOSE 5000
+
+# Run your application with Gunicorn
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "server:app"]
