@@ -25,6 +25,8 @@ def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
     options = Options()
     options.headless = True  # Run Chrome in headless mode
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
 
     # Initialize the Selenium WebDriver with options
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
