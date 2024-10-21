@@ -7,7 +7,7 @@ from scrape_main import MAIN_SCRAPER
 app = Flask(__name__)
 
 # Define a route for the API endpoint
-@app.route('/events', methods=['GET'])
+@app.route('/', methods=['GET'])
 def send_data():
     # Sample data to be sent
     print('req')
