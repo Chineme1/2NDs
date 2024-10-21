@@ -17,12 +17,17 @@ from snaxk import  snack_all #this is for snacks/Maybe later
 # from tinydb import TinyDB, Query
 from post_website import hook
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 
 
 def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
-    driver = webdriver.Chrome(ChromeDriverManager().install())
+    options = Options()
+    options.headless = True  # Run Chrome in headless mode
+
+    # Initialize the Selenium WebDriver with options
+    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     # Open the webpage
     driver.get(url)
