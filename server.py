@@ -1,4 +1,4 @@
-
+import os
 from flask import Flask, jsonify
 from upload import packIT
 from scrape_main import MAIN_SCRAPER
