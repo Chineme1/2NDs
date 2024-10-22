@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
     libnspr4 libnss3 lsb-release xdg-utils libxss1 libdbus-glib-1-2 \
     curl unzip wget vim xvfb libgbm1 libu2f-udev libvulkan1
 
-RUN CHROMEDRIVER_VERSION=130.0.6723.58 && \
+RUN CHROMEDRIVER_VERSION=114.0.5735.90 && \
     wget https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip && \
     unzip chromedriver_linux64.zip -d /usr/bin && chmod +x /usr/bin/chromedriver && rm chromedriver_linux64.zip
 
