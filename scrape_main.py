@@ -27,7 +27,7 @@ def MAIN_SCRAPER(url):
     options.add_argument("--disable-dev-shm-usage")
 
     # Initialize the Selenium WebDriver with options
-    driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(version="114.0.5735.90").install(), options=options)
 
     # Open the webpage
     driver.get(url)
