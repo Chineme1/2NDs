@@ -30,7 +30,7 @@ def MAIN_SCRAPER(url):
     options.add_argument('--remote-debugging-port=9222')
 
     # Initialize the Selenium WebDriver with options
-    driver = webdriver.Chrome(ChromeDriverManager(version="114.0.5735.90").install(), options=options)
+    driver = webdriver.Chrome(ChromeDriverManager(version="130.0.6723.58").install(), options=options)
 
     # Open the webpage
     driver.get(url)
