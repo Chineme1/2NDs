@@ -12,7 +12,7 @@ RUN sudo apt-get update && \
 COPY . /app
 
 # Install Python dependencies, including Flask and Selenium
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt --break-system-packages
 
 # Expose the Flask app port
 EXPOSE 5000
