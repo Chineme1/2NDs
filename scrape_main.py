@@ -13,6 +13,8 @@ for link in links:
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from total_scraper import scrape_all
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 # from tinydb import TinyDB, Query
 
 
@@ -22,7 +24,7 @@ def MAIN_SCRAPER(url):
     #options.headless = True  # Run Chrome in headless mode
 
     # Initialize the Selenium WebDriver with options
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(service=Service(ChromeDriveManager().install()))
 
     # Open the webpage
     driver.get(url)
@@ -31,7 +33,7 @@ def MAIN_SCRAPER(url):
     html = driver.page_source
 
     # Parse the fully-rendered HTML with BeautifulSoup
-    soup = BeautifulSoup(html, 'html.parser')
+    soup = BeautifulSoup(html, 'lxml')
 
     # Find all <a> tags with href attributes
     links = [a['href'] for a in soup.find_all('a', href=True)]
