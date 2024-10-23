@@ -19,7 +19,6 @@ from total_scraper import scrape_all
 
 def MAIN_SCRAPER(url):
     # Initialize Selenium WebDriver (make sure to install the appropriate driver, e.g., ChromeDriver)
-    options = Options()
     #options.headless = True  # Run Chrome in headless mode
 
     # Initialize the Selenium WebDriver with options
