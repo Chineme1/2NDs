@@ -1,5 +1,5 @@
 # Use Python base image instead of Selenium image
-FROM python:3.10-slim
+FROM python:3.10
 
 WORKDIR /app
 
