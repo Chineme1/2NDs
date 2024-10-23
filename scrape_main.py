@@ -14,6 +14,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from total_scraper import scrape_all
 from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
 # from tinydb import TinyDB, Query
 
@@ -24,7 +25,10 @@ def MAIN_SCRAPER(url):
     #options.headless = True  # Run Chrome in headless mode
 
     # Initialize the Selenium WebDriver with options
-    driver = webdriver.Chrome(service=Service(ChromeDriveManager().install()))
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--headless')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+    driver = webdriver.Chrome(service=Service(ChromeDriveManager().install()), options=chrome_options)
 
     # Open the webpage
     driver.get(url)
