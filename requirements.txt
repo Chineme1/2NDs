@@ -5,4 +5,4 @@ selenium==4.9.1
 webdriver_manager==4.0.0
 lxml
 Werkzeug==2.0.3
-gunicorn
+gunicorn==22.0.0
