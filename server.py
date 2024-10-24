@@ -10,9 +10,8 @@ app = Flask(__name__)
 @app.route('/')
 def send_data():
     # Sample data to be sent
-    #data = packIT(MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events'))
-    #return jsonify(data)
-    return "Test"
+    data = packIT(MAIN_SCRAPER('https://umdearborn.campuslabs.com/engage/events'))
+    return jsonify(data)
 
 # Run the app
 if __name__ == '__main__':
