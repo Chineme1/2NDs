@@ -46,34 +46,7 @@ CMD ["python", "server.py"]
 
 #CMD ["python", "server.py"]
 
-# Use the official Python image as the base image
-FROM python:3.10
 
-# Set the working directory
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install Python dependencies (make sure to include Flask, Selenium, etc. in your requirements.txt)
-RUN pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
-
-# Install Chrome and ChromeDriver
-RUN apt-get update && apt-get install -y wget unzip && \
-    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -f install -y && \
-    rm google-chrome-stable_current_amd64.deb && \
-    wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    mv chromedriver /usr/local/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver && \
-    apt-get clean
-
-# Expose the port that the Flask app will run on (default Flask port is 5000)
-EXPOSE 5000
-
-# Define the command to run your Flask app
-CMD ["python", "server.py"]
 # FROM ubuntu:bionic
 #FROM python:3.10
 
