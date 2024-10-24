@@ -1,32 +1,33 @@
-# Use the official Python image as the base image
+# Use an official Python runtime as a parent image
 FROM python:3.10
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy the current directory contents into the container
 COPY . /app
 
-# Install Python dependencies (make sure to include Flask, Selenium, etc. in your requirements.txt)
-RUN pip install --no-cache-dir --trusted-host pypi.python.org -r requirements.txt
+# Install any needed packages specified in requirements.txt
+RUN pip install --trusted-host pypi.python.org -r requirements.txt
 
-# Install Chrome and ChromeDriver
+# Install dependencies for Chrome
 RUN apt-get update && apt-get install -y wget unzip && \
-    wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome-stable_current_amd64.deb || apt-get -f install -y && \
-    rm google-chrome-stable_current_amd64.deb && \
-    wget -N https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip && \
-    unzip chromedriver_linux64.zip && \
-    mv chromedriver /usr/local/bin/chromedriver && \
-    chmod +x /usr/local/bin/chromedriver && \
-    apt-get clean
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+  apt install -y ./google-chrome-stable_current_amd64.deb && \
+  rm google-chrome-stable_current_amd64.deb && \
+  apt-get install -y xvfb
 
-# Expose the port that the Flask app will run on (default Flask port is 5000)
+# Install ChromeDriver for Selenium
+RUN pip install selenium webdriver-manager
+
+# Expose the port Flask will run on
 EXPOSE 5000
 
-# Define the command to run your Flask app
-CMD ["python", "server.py"]
+# Define environment variable for Flask
+ENV FLASK_APP=server.py
 
+# Run the app
+CMD ["flask", "run", "--host=0.0.0.0"]
 
 # Use Python base image instead of Selenium image
 #FROM python:3.10
